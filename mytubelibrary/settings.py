@@ -44,7 +44,7 @@ if not DEBUG:
 # SSL and Cookies
 # ----- Production ----- #
 if not DEBUG:
-    SECURE_SSL_REDIRECT = True
+    # SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
 
@@ -207,7 +207,7 @@ MEDIA_URL = '/media/'
 
 # --- development --- #
 if DEBUG:
-    STATIC_ROOT = BASE_DIR / 'static'
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
     MEDIA_ROOT = BASE_DIR / 'media'
 
 # --- Production --- #
@@ -217,7 +217,7 @@ if not DEBUG:
 
     # --- For Heroku --- #
     STATIC_ROOT = BASE_DIR / 'staticfiles'
-    # MEDIA_ROOT = BASE_DIR / 'media'
+    MEDIA_ROOT = BASE_DIR / 'media'
 
     # --- Only for use whit Cloudinary media files storage --- #
     CLOUDINARY_STORAGE = {
