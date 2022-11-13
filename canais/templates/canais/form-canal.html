@@ -1,0 +1,155 @@
+{% extends 'base/base_index_min.html' %}
+{% load static %}
+
+
+{% block titulo %}Cadastro de Canal{% endblock %}
+
+{% block subtitulo_da_pagina %}Cadastro de novo canal{% endblock %}
+
+{% block conteudo %}
+
+    <div>
+
+    {% include 'base/_messages.html' %}
+
+    {% if user.is_anonymous %}
+
+        {% include 'base/_aviso_login.html' %}
+
+    {% else %}
+
+        <form method="POST" class="form" name="form_canal" action="{% url 'form-canal' %}" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="canal_categoria">Categoria(s) <span style="color: red;">*</span></label>
+                        <select multiple class="form-control" id="canal_categoria" name="canal_categoria" required>
+                            {% for cat in form.canal_categoria %}
+                                {{ cat }}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- Botão para acionar modal Cadastro de Categoria -->
+                    <div class="form-group">
+                        <button type="button"
+                                class="btn btn-outline-primary btn-sm shadow-sm"
+                                data-toggle="modal"
+                                data-target="#modalExemplo">Nova categoria
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        <label for="canal_dia_trans">Dia(s) de transmissão</label>
+                        <select multiple class="form-control" id="canal_dia_trans" name="canal_dia_trans">
+                            {% for dia in form.canal_dia_trans %}
+                                {{ dia }}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        <label for="canal_hora_trans">Horas(s) de transmissão</label>
+                        <select multiple class="form-control" id="canal_hora_trans" name="canal_hora_trans">
+                            {% for hora in form.canal_hora_trans %}
+                                {{ hora }}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="canal_nome">Nome do Canal <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="canal_nome" name="canal_nome" value="{{ request.POST.canal_nome }}" maxlength="30" required>
+                        <small id="password-help" class="form-text text-muted">
+                            30 caracteres no máximo
+                        </small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="canal_subtitulo">Subtitulo</label>
+                        <input type="text" class="form-control" id="canal_subtitulo" name="canal_subtitulo" value="{{ request.POST.canal_subtitulo }}">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="canal_idioma">Idioma</label>
+                        <select class="form-control" id="canal_idioma" name="canal_idioma" required>
+                            {% for idioma in form.canal_idioma %}
+                                {{ idioma }}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="canal_programas">Programação</label>
+                        <textarea type="url" class="form-control" id="canal_programas" name="canal_programas" maxlength="500">{{ request.POST.canal_programas }}</textarea>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="canal_observacoes">Descrição</label>
+                        <textarea type="url" class="form-control" id="canal_observacoes" name="canal_observacoes" maxlength="1500">{{ request.POST.canal_observacoes }}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="canal_url"><span class="fa fa-youtube" style="color: #C41C20;"></span> Link do Canal <span style="color: red;">*</span></label>
+                        <input type="url" class="form-control" id="canal_url" name="canal_url" value="{{ request.POST.canal_url }}" maxlength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="canal_foto">Foto (Preferência 100x100) <span style="color: red;">*</span></label>
+                        <input class="btn btn-outline-primary btn-sm shadow-sm" type="file" accept="image/*" id="canal_foto" name="canal_foto" value="{{ request.POST.canal_foto }}" maxlength="100" required>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="canal_site"><span class="contact-main fa fa-globe" style="color: #102D69;"></span> Link do Site</label>
+                        <input type="url" class="form-control" id="canal_site" name="canal_site" value="{{ request.POST.canal_site }}" maxlength="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="canal_facebook"><span class="fa fa-facebook" style="color: #3a5795;"></span> Link do Facebook</label>
+                        <input type="url" class="form-control" id="canal_facebook" name="canal_facebook" value="{{ request.POST.canal_facebook }}" maxlength="100">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="canal_twitter"><span class="fa fa-twitter" style="color: #00a7e6;"></span> Link do Twitter</label>
+                        <input type="url" class="form-control" id="canal_twitter" name="canal_twitter" value="{{ request.POST.canal_twitter }}" maxlength="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="canal_instagram"><span class="fa fa-instagram" style="color: #F96000;"></span> Link do Instagram</label>
+                        <input type="url" class="form-control" id="canal_instagram" name="canal_instagram" value="{{ request.POST.canal_instagram }}" maxlength="100">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary shadow-lg" name="btn_cadastro_canal">Cadastrar</button>
+                <div id="msgSubmit" class="h3 text-center hidden"></div>
+            </div>
+
+        </form>
+    {% endif %}
+    </div>
+
+    {% include 'base/form-categoria.html' %}
+
+{% endblock %}

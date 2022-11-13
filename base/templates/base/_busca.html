@@ -1,0 +1,49 @@
+<div class="row">
+
+    <div class="col custom-col col-md-4">
+        <form class="busca" action="{% url 'canal-busca' %}">
+            <input
+                name="termo"
+                value=""
+                class="form-control border mr-sm-2"
+                type="search"
+                placeholder="Primeiras letras do nome do canal"
+                aria-label="Search">
+        </form>
+    </div>
+
+    <div class="col custom-col col-md-4">
+        <div class="d-inline dropdown">
+            <button class="btn btn-outline-secondary border btncustom-menu-1 dropdown-toggle "
+                    type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Por categoria
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for cat in categoria_context %}
+                <a class="dropdown-item" href="{% url 'canal-categoria' cat %}">{{ cat }}</a>
+                {% endfor %}
+                <a class="dropdown-item" href="{% url 'index' %}">Todos os canais</a>
+            </div>
+        </div>
+
+        <div class="d-inline dropdown">
+            <button class="btn btn-outline-secondary border btncustom-menu-1 dropdown-toggle"
+                    type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Por dia da semana
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {% for dia in dia_context %}
+                <a class="dropdown-item" href="{% url 'canal-dia' dia %}">{{ dia }}</a>
+                {% endfor %}
+                <a class="dropdown-item" href="{% url 'index' %}">Todos os canais</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col custom-col-2">
+        <a class="d-inline btn btn-outline-secondary border " href="{% url 'playlist-index' %}">PlayLists</a>
+        <a class="d-inline btn btn-outline-secondary border " href="{% url 'categoria-index' %}">Categorias</a>
+        <a class="d-inline btn mr-4 btn-outline-secondary border " href="{% url 'form-canal' %}">Novo canal</a>
+    </div>
+
+</div>

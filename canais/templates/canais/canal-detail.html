@@ -1,0 +1,130 @@
+{% extends 'base/base_index_min_sidebar.html' %}
+{% load static %}
+
+{% block titulo %}{{ canal.canal_nome }}{% endblock %}
+
+{% block conteudo %}
+
+    <!-- Main -->
+    <div id="main">
+
+        <div class="container">
+
+            {% include 'base/_messages.html' %}
+
+            <div class="row">
+                <!-- Content -->
+                <!-- Foto e Titulo -->
+                <div id="content" class="8u skel-cell-important canal-detail">
+
+                    <section>
+                        <div class="row">
+                            <div class="col col-md-3">
+                                <img class="imagem-canal-detail" src="{{ canal.canal_foto.url }}" alt="{{ canal.canal_nome}}">
+                            </div>
+                            <!-- Titulo e subtitulo -->
+                            <div class="col">
+                                <header class="main-header-custom">
+                                    <div class="dropdown">
+                                        <h2>
+                                            <a class="dropdown-toggle"
+                                                type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                {{ canal.canal_nome }}
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="{% url 'canal-update' canal.pk %}">Alterar canal</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="{% url 'canal-delete' canal.pk %}">Apagar canal</a>
+                                            </div>
+                                        </h2>
+                                    </div>
+                                    <span class="byline">{{ canal.canal_subtitulo }}</span>
+                                </header>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h2 class="detail-h2">Categoria:</h2>
+                            <p>{{ canal.categoria }}</p>
+                        </div>
+                        <div>
+                            <h2 class="detail-h2">Idioma:</h2>
+                            <p>{{ canal.canal_idioma }}</p>
+                        </div>
+                        <div>
+                            <h2 class="detail-h2">Dia:</h2>
+                            <p>{{ canal.dia_transmissao }}</p>
+                        </div>
+                        <div>
+                            <h2 class="detail-h2">Hora:</h2>
+                            {% if canal.hora_transmissao %}
+                            <p>{{ canal.hora_transmissao }} horas</p>
+                            {% else %}
+                            <p></p>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h2 class="detail-h2">Programação:</h2>
+                            <p>{{ canal.canal_programas }}</p>
+                        </div>
+                        <div>
+                            <h2 class="detail-h2">Descrição:</h2>
+                            <p>{{ canal.canal_observacoes }}</p>
+                        </div>
+
+                        <section>
+                        <div class="w-50 mx-auto">
+                        <ul class="contact contact-main">
+                            <li><a {% if canal.canal_site %} href="{{ canal.canal_site}}" {% endif %} class="fa fa-globe" target="_blank" rel="noopener noreferrer"></a></li>
+                            <li><a {% if canal.canal_facebook %} href="{{ canal.canal_facebook}}" {% endif %} class="fa fa-facebook" target="_blank" rel="noopener noreferrer"></a></li>
+                            <li><a {% if canal.canal_twitter %} href="{{ canal.canal_twitter}}" {% endif %} class="fa fa-twitter" target="_blank" rel="noopener noreferrer"></a></li>
+                            <li><a {% if canal.canal_instagram %} href="{{ canal.canal_instagram}}" {% endif %} class="fa fa-instagram" target="_blank" rel="noopener noreferrer"></a></li>
+                        </ul>
+
+                        <a href="{{ canal.canal_url }}" class="button button-style1" target="_blank" rel="noopener noreferrer"><span class="contact-main fa fa-youtube"></span> Canal</a>
+                        <a href="{{ canal.canal_url }}/videos" class="button button-style1" target="_blank" rel="noopener noreferrer"><span class="contact-main fa fa-youtube"></span> Vídeos</a>
+                        <a href="{{ canal.canal_url }}/playlists" class="button button-style1" target="_blank" rel="noopener noreferrer"><span class="contact-main fa fa-youtube"></span> PlayLists</a>
+                        </div>
+                        </section>
+
+                    </section>
+                </div>
+
+                <!-- Sidebar -->
+                <div id="sidebar" class="4u">
+                    <section>
+                        <header class="main-header-custom">
+                            <h2 class="detail-h2">Meus Canais</h2>
+                        </header>
+                        <div>
+
+                            <section class="lateral overflow-auto" style="height: 250px;">
+                                {% for can in canal_obj %}
+                                <p><a href="{% url 'canal-detail' can.pk %}">{{ can }}</a></p>
+                                {% endfor %}
+                            </section>
+
+                        </div>
+                    <br><hr>
+                    </section>
+                    <section>
+                        <header class="main-header-custom">
+                            <h2 class="detail-h2">Minhas Playlists</h2>
+                        </header>
+                        <div>
+
+                            <section class="lateral overflow-auto" style="height: 250px;">
+                                {% for playlist in playlist_obj %}
+                                <p><a href="{% url 'playlist-detail' playlist.pk %}">{{ playlist }}</a></p>
+                                {% endfor %}
+                            </section>
+                        </div>
+                    <br><hr>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main -->
+{% endblock %}

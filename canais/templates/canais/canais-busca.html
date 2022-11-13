@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+{% load static %}
+
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pesquisa - MyTubeLibrary</title>
+        {% include 'base/_head.html' %}
+    </head>
+    <!-- body -->
+	<body class="homepage">
+
+        <!-- Header -->
+        {% include 'base/_header.html' %}
+        <!-- Main -->
+        <div id="main">
+            {% if user.is_anonymous %}
+                {% include 'base/_aviso_login.html' %}
+            {% else %}
+                <div id="content" class="container">
+
+                        <div class="d-flex flex-row justify-content-center">
+                            <header>
+                                <h2>Resultado da pesquisa - {{ request.GET.termo }}</h2>
+                            </header>
+                        </div>
+
+                    {% include 'base/_busca.html' %}
+                    {% include 'canais/_canais_cards.html' %}
+                </div>
+            {% endif %}
+        </div>
+        <!-- Tweet -->
+        <!-- Footer -->
+        {% include 'base/_footer.html' %}
+
+        {% include 'base/_scripts_footer.html' %}
+
+	</body>
+</html>

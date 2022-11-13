@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <title>PlayLists - My Tube Library</title>
+        {% include 'base/_head.html' %}
+    </head>
+    <!-- body -->
+	<body class="homepage">
+
+        <!-- Header -->
+        {% include 'base/_header.html' %}
+        <!-- Main -->
+        <div id="main">
+            {% if user.is_anonymous %}
+                {% include 'base/_aviso_login.html' %}
+            {% else %}
+                <div id="content" class="container">
+
+                    <section>
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="dropdown">
+                                <header>
+                                    <h2>As minhas Playlists</h2>
+                                </header>
+                            </div>
+                        </div>
+                    </section>
+
+                    {% include 'base/_messages.html' %}
+                    {% include 'base/_playlist_menu.html' %}
+                    {% include 'playlists/_playlist_card.html' %}
+                    {% include 'base/_pagination.html' %}
+                </div>
+            {% endif %}
+        </div>
+        <!-- Tweet -->
+        <!-- Footer -->
+        {% include 'base/_footer.html' %}
+
+        {% include 'base/_scripts_footer.html' %}
+
+	</body>
+</html>

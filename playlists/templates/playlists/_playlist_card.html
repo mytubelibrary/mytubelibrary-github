@@ -1,0 +1,48 @@
+{% load static %}
+<div class="row">
+
+    {% for playlist in playlists_context %}
+    <section class="6u border rounded shadow-sm p-3">
+
+        <a href="{% url 'playlist-detail' playlist.pk %}" class="custom-a">
+            <img class="imagem-playlist" src="{{ playlist.playlist_foto.url }}" alt="{{ playlist.playlist_nome }}">
+            <header>
+                <h2 class="custom-text">{{ playlist.playlist_nome}}</h2>
+            </header>
+        </a>
+
+        <table class="">
+            <tbody>
+                <tr>
+                    <td class="td-custom">nº Vídeos:</td>
+                    <td>{{ playlist.playlist_numero_v }}</td>
+                </tr>
+                <tr>
+                    <td class="td-custom">Canal:</td>
+                    <td>{{ playlist.playlist_canal }}</td>
+                </tr>
+                <tr>
+                    <td class="td-custom">Categoria:</td>
+                    <td>{{ playlist.categoria }}</td>
+                </tr>
+                <tr>
+                    <td class="td-custom">Idioma:</td>
+                    <td>{{ playlist.playlist_idioma }}</td>
+                </tr>
+                <tr>
+                    <td class="td-custom">Dia(s):</td>
+                    <td>{{ playlist.dia_transmissao }}</td>
+                </tr>
+                <tr>
+                    <td class="td-custom">Hora:</td>
+                    <td>{{ playlist.hora_transmissao }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ playlist.playlist_url }}" class="button button-style2" target="_blank" rel="noopener noreferrer"><span class="contact-main fa fa-youtube"></span> Playlist</a>
+
+    </section>
+    {% endfor %}
+
+</div>

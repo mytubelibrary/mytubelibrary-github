@@ -1,0 +1,60 @@
+{%  load static %}
+
+<div id="header">
+
+    <div id="nav-wrapper">
+        <!-- Nav -->
+
+        <nav id="nav">
+
+            <!-- Logo -->
+            <div class="logo">
+              <a href="https://antoniocalheirosneves.herokuapp.com/" target="_blank" rel="noopener noreferrer">
+                <img class="active" src="{% static 'base/images/logo_an.png' %}" alt="António Calheiros Neves"/>
+              </a>
+            </div>
+
+            <!-- Usuario -->
+            <div class="usuario">
+                {% if user.is_anonymous %}
+                    <div>
+                    <a href="{% url 'novo-usuario' %}">
+                        Cadastrar
+                    </a>
+                    </div>
+                    <div>
+                    <a href="{% url 'login' %}">
+                        Login
+                    </a>
+                    </div>
+                {% else %}
+
+                    <a href="{% url 'logout' %}">
+                        Sair
+                    </a>
+
+                {% endif %}
+            </div>
+
+            <!-- Nav Principal -->
+            <ul class="nav-principal">
+                <li class="active"><a href="{% url 'index' %}">Canais</a></li>
+                <li><a href="{% url 'categoria-index' %}">Categorias</a></li>
+                <li><a href="{% url 'playlist-index' %}">Playlists</a></li>
+                <li><a href="{% url 'agradecimentos' %}">Agradecimentos</a></li>
+                <li><a href="#footer">Contactos</a></li>
+            </ul>
+
+        </nav>
+    </div>
+
+    <div class="container">
+
+        <!-- Logo -->
+        <div id="logo">
+            <h1>My Tube Library</h1>
+            <span class="tag">
+            <a href="https://antoniocalheirosneves.com/" target="_blank" rel="noopener noreferrer">By António Calheiros Neves</a></span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+{% load static %}
+
+<!--
+	Linear by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html lang="pt">
+
+	<head>
+		<meta charset="UTF-8">
+
+        <title>{% block titulo %}{% endblock %} - MyTubeLibrary</title>
+
+        {% include 'base/_head.html' %}
+	</head>
+
+	<body>
+
+	    <!-- Header -->
+		{% include 'base/_header.html' %}
+    	<!-- Header -->
+
+        <!-- Main -->
+        <div id="main">
+
+            <div id="content" class="container">
+
+                <section>
+                    <header>
+                        <h2>{% block subtitulo_da_pagina %}{% endblock %}</h2>
+                    </header>
+                </section>
+
+                {% block conteudo %}{% endblock %}
+
+            </div>
+
+        </div>
+        <!-- /Main -->
+
+        <!-- Tweet -->
+        <!-- Footer -->
+        {% include 'base/_footer.html' %}
+
+        {% include 'base/_scripts_footer.html' %}
+
+	</body>
+</html>

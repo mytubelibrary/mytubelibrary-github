@@ -1,0 +1,130 @@
+{% extends 'base/base_index_min.html' %}
+{% load static %}
+
+{% block titulo %}{{ canal.canal_nome }}{% endblock %}
+
+{% block subtitulo_da_pagina %}Alterar {{ canal.canal_nome }}{% endblock %}
+
+{% block conteudo %}
+
+    {% include 'base/_messages.html' %}
+
+    <form method="POST" class="form" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="canal_categoria">Categoria(s) <span style="color: red;">*</span></label>
+                    <select multiple class="form-control" id="canal_categoria" name="canal_categoria" required>
+                        {% for cat in form.canal_categoria %}
+                            {{ cat }}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                    <label for="canal_dia_trans">Dia(s) de transmissão</label>
+                    <select multiple class="form-control" id="canal_dia_trans" name="canal_dia_trans">
+                        {% for dia in form.canal_dia_trans %}
+                            {{ dia }}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                    <label for="canal_hora_trans">Horas(s) de transmissão</label>
+                    <select multiple class="form-control" id="canal_hora_trans" name="canal_hora_trans">
+                        {% for hora in form.canal_hora_trans %}
+                            {{ hora }}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="canal_nome">Nome do Canal <span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" id="canal_nome" name="canal_nome" value="{{ object.canal_nome }}" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="canal_subtitulo">Subtitulo</label>
+                    <input type="text" class="form-control" id="canal_subtitulo" name="canal_subtitulo" value="{{ object.canal_subtitulo }}">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="canal_idioma">Idioma</label>
+                    <select class="form-control" id="canal_idioma" name="canal_idioma" required>
+                        {% for idioma in form.canal_idioma %}
+                            {{ idioma }}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="canal_programas">Programação</label>
+                    <textarea type="text" class="form-control" id="canal_programas" name="canal_programas">{{ object.canal_programas }}</textarea>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="canal_observacoes">Descrição</label>
+                    <textarea type="textarea" class="form-control" id="canal_observacoes" name="canal_observacoes">{{ object.canal_observacoes }}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="canal_url"><span class="fa fa-youtube" style="color: #C41C20;"></span> Link do Canal <span style="color: red;">*</span></label>
+                    <input type="url" class="form-control" id="canal_url" name="canal_url" value="{{ object.canal_url }}" required>
+                </div>
+                <div class="form-group">
+                    {{ form.canal_foto }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="canal_site"><span class="contact-main fa fa-globe" style="color: #102D69;"></span> Link do Site</label>
+                    <input type="url" class="form-control" id="canal_site" name="canal_site" value="{{ object.canal_site }}">
+                </div>
+                <div class="form-group">
+                    <label for="canal_facebook"><span class="fa fa-facebook" style="color: #3a5795;"></span> Link do Facebook</label>
+                    <input type="url" class="form-control" id="canal_facebook" name="canal_facebook" value="{{ object.canal_facebook }}">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="canal_twitter"><span class="fa fa-twitter" style="color: #00a7e6;"></span> Link do Twitter</label>
+                    <input type="url" class="form-control" id="canal_twitter" name="canal_twitter" value="{{ object.canal_twitter }}">
+                </div>
+                <div class="form-group">
+                    <label for="canal_instagram"><span class="fa fa-instagram" style="color: #F96000;"></span> Link do Instagram</label>
+                    <input type="url" class="form-control" id="canal_instagram" name="canal_instagram" value="{{ object.canal_instagram }}">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn mr-2 btn-primary shadow-lg" name="btn_cadastro_canal">Alterar</button>
+            <a class="btn btn-primary btncustom shadow-lg mr-1" role="button" href="{% url 'canal-detail' object.pk %}">Cancelar</a>
+        </div>
+
+    </form>
+
+{% endblock %}

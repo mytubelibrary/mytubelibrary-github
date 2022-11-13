@@ -1,0 +1,45 @@
+{% extends 'base/base_index_min.html' %}
+{% load static %}
+
+{% block titulo %}Categorias{% endblock %}
+
+{% block subtitulo_da_pagina %}Categorias{% endblock %}
+
+{% block conteudo %}
+
+    {% include 'base/_messages.html' %}
+
+    {% if user.is_anonymous %}
+
+        {% include 'base/_aviso_login.html' %}
+
+    {% else %}
+
+    {% include 'base/_categorias_menu.html' %}
+
+    <div id="main" class="cat-main">
+
+    {% for cat in categoria_context %}
+
+        <div class="card w-75 d-flex flex-row mb-3">
+            <div class="card-body align-middle">
+                <div class="row">
+                    <div class="col-md-8">
+                      <h2>{{ cat }}</h2>
+                    </div>
+                    <div class="col">
+                        <a class="btn mr-2 btncustom btn-outline-secondary border " href="{% url 'categoria-delete' cat.pk %}">Apagar</a>
+                        <a class="btn btncustom btn-outline-secondary border" href="{% url 'categoria-update' cat.pk %}">Modificar</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+{% endblock %}

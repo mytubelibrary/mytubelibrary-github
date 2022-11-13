@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+{% load static %}
+<!--
+	Linear by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <title>My Tube Library</title>
+        {% include 'base/_head.html' %}
+    </head>
+    <!-- body -->
+	<body class="homepage">
+        <!-- Header -->
+        {% include 'base/_header.html' %}
+        <!-- Featured -->
+        {% include 'base/_featured.html' %}
+        <!-- Main -->
+        <div id="main">
+            {% if user.is_anonymous %}
+                {% include 'base/_aviso_login.html' %}
+            {% else %}
+                <div id="content" class="container">
+                    <section>
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="dropdown">
+                                <header>
+                                    <h2>Os Meus Canais -
+                                        <a class="dropdown-toggle"
+                                                type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{ user.first_name }}
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="{% url 'alteracao-dados' user.pk %}">Alterar perfil</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url 'change-password' %}">Alterar senha</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url 'usuario-delete' user.pk %}" style="color: red;">Apagar a conta</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{% url 'logout' %}">Sair</a>
+                                        </div>
+                                    </h2>
+                                </header>
+                            </div>
+                        </div>
+                    </section>
+                    {% include 'base/_messages.html' %}
+                    {% include 'base/_busca.html' %}
+                    {% include 'canais/_canais_cards.html' %}
+                    {% include 'base/_pagination.html' %}
+                </div>
+            {% endif %}
+        </div>
+        <!-- Tweet -->
+        <!-- Footer -->
+        {% include 'base/_footer.html' %}
+        {% include 'base/_scripts_footer.html' %}
+        <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+        <script>
+            window.cookieconsent.initialise({
+            "palette": {
+            "popup": {
+              "background": "#237afc"
+            },
+            "button": {
+              "background": "#fff",
+              "text": "#237afc"
+            }
+            },
+            "theme": "classic",
+            "position": "bottom-right"
+            });
+        </script>
+	</body>
+</html>

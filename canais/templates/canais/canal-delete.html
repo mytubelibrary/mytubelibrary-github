@@ -1,0 +1,26 @@
+{% extends 'base/base_index_min.html' %}
+{% load static %}
+
+{% block titulo %}Apagar Canal{% endblock %}
+
+{% block subtitulo_da_pagina %}
+    Tem a certeza que deseja apagar o canal
+    <br><br><br>
+    {{ object.canal_nome }} ?
+{% endblock %}
+
+{% block conteudo %}
+
+    <div class="apagar-canal">
+        <form method="POST" class="form" name="form_canal">
+            {% csrf_token %}
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btncustom shadow-lg mr-2" name="btn_cadastro_canal">Sim</button>
+
+                <a class="btn btn-primary btncustom shadow-lg mr-1" role="button" href="{% url 'canal-detail' object.pk %}">Cancelar</a>
+            </div>
+        </form>
+
+    </div>
+
+{% endblock %}

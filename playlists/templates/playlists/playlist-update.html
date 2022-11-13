@@ -1,0 +1,126 @@
+{% extends 'base/base_index_min.html' %}
+{% load static %}
+
+{% block titulo %}{{ playlist.playlist_nome }}{% endblock %}
+
+{% block subtitulo_da_pagina %}Alterar {{ playlist.playlist_nome }}{% endblock %}
+
+{% block conteudo %}
+
+    <div>
+
+    {% include 'base/_messages.html' %}
+
+    {% if user.is_anonymous %}
+
+        {% include 'base/_aviso_login.html' %}
+
+    {% else %}
+
+        <form method="POST" class="form" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="playlist_categoria">Categoria(s) <span style="color: red;">*</span></label>
+                        <select multiple class="form-control" id="playlist_categoria" name="playlist_categoria" required>
+                            {% for cat in form.playlist_categoria %}
+                                {{ cat }}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        <label for="playlist_dia">Dia(s) de transmissão</label>
+                        <select multiple class="form-control" id="playlist_dia" name="playlist_dia">
+                            {% for dia in form.playlist_dia %}
+                                {{ dia }}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        <label for="playlist_hora">Horas(s) de transmissão</label>
+                        <select multiple class="form-control" id="playlist_hora" name="playlist_hora">
+                            {% for hora in form.playlist_hora %}
+                                {{ hora }}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="playlist_nome">Nome da Playlist <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="playlist_nome" name="playlist_nome" value="{{ playlist.playlist_nome }}" maxlength="50" required>
+                        <small id="playlist_nome" class="form-text text-muted">
+                            50 caracteres no máximo
+                        </small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="playlist_canal">Canal do YouTube</label>
+                        <input type="text" class="form-control" id="playlist_canal" name="playlist_canal" value="{{ playlist.playlist_canal }}" maxlength="50">
+                        <small id="playlist_nome" class="form-text text-muted">
+                            50 caracteres no máximo
+                        </small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="playlist_idioma">Idioma</label>
+                        <select class="form-control" id="playlist_idioma" name="playlist_idioma" required>
+                            {% for idioma in form.playlist_idioma %}
+                                {{ idioma }}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    {{ form.playlist_foto }}
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="playlist_url"><span class="fa fa-youtube" style="color: #C41C20;"></span> Link da playlist <span style="color: red;">*</span></label>
+                        <input type="url" class="form-control" id="playlist_url" name="playlist_url" value="{{ playlist.playlist_url }}" maxlength="300" required>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="playlist_numero_v">Número de vídeos</label>
+                        <input type="text" class="form-control" id="playlist_numero_v" name="playlist_numero_v" value="{{ playlist.playlist_numero_v }}" maxlength="4">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="playlist_observacoes">Descrição</label>
+                        <textarea type="url" class="form-control" id="playlist_observacoes" name="playlist_observacoes" maxlength="1500">{{ playlist.playlist_observacoes }}</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary shadow-lg" name="btn_cadastro_playlist">Cadastrar</button>
+                <div id="msgSubmit" class="h3 text-center hidden"></div>
+            </div>
+
+        </form>
+    {% endif %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'base/base_index_min_sidebar.html' %}
+{% load static %}
+
+{% block titulo %}{{ playlist.playlist_nome }}{% endblock %}
+
+{% block conteudo %}
+
+    <!-- Main -->
+    <div id="main">
+
+        <div class="container">
+
+            {% include 'base/_messages.html' %}
+
+            <div class="row">
+                <!-- Content -->
+                <!-- Foto e Titulo -->
+                <div id="content" class="8u skel-cell-important canal-detail">
+
+                    <section>
+                        <div class="row">
+                                <img class="imagem-playlist-detail" src="{{ playlist.playlist_foto.url }}" alt="{{ playlist.playlist_nome}}">
+                        </div>
+                        <div class="row">
+                            <!-- Titulo e subtitulo -->
+                            <div class="col">
+                                <header class="main-header-custom">
+                                    <div class="dropdown">
+                                        <h2>
+                                            <a class="dropdown-toggle"
+                                                type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                {{ playlist.playlist_nome }}
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="{% url 'playlist-update' playlist.pk %}">Alterar playlist</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="{% url 'playlist-delete' playlist.pk %}">Apagar playlist</a>
+                                            </div>
+                                        </h2>
+                                    </div>
+                                </header>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h2 class="detail-h2">Categoria:</h2>
+                            <p>{{ playlist.categoria }}</p>
+                        </div>
+                        <div>
+                            <h2 class="detail-h2">Idioma:</h2>
+                            <p>{{ playlist.playlist_idioma }}</p>
+                        </div>
+                        <div>
+                            <h2 class="detail-h2">Canal:</h2>
+                            <p>{{ playlist.playlist_canal }}</p>
+                        </div>
+                        <div>
+                            <h2 class="detail-h2">Dia:</h2>
+                            <p>{{ playlist.dia_transmissao }}</p>
+                        </div>
+                        <div>
+                            <h2 class="detail-h2">Hora:</h2>
+                            {% if playlist.hora_transmissao %}
+                            <p>{{ playlist.hora_transmissao }} horas</p>
+                            {% else %}
+                            <p></p>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h2 class="detail-h2">Nº de Vídeos:</h2>
+                            <p>{{ playlist.playlist_numero_v }}</p>
+                        </div>
+                        <div>
+                            <h2 class="detail-h2">Descrição:</h2>
+                            <p>{{ playlist.playlist_observacoes }}</p>
+                        </div>
+
+                        <section>
+                        <div class="w-50 mx-auto">
+
+                            <br><br>
+                        <a href="{{ playlist.playlist_url }}" class="button button-style1" target="_blank" rel="noopener noreferrer"><span class="contact-main fa fa-youtube"></span> Playlist</a>
+                        </div>
+                        </section>
+
+                    </section>
+                </div>
+
+                <!-- Sidebar -->
+                <div id="sidebar" class="4u">
+                    <section>
+                        <header class="main-header-custom">
+                            <h2 class="detail-h2">Minhas Playlists</h2>
+                        </header>
+                        <div>
+
+                            <section class="lateral overflow-auto" style="height: 250px;">
+                                {% for play in playlist_obj %}
+                                <p><a href="{% url 'playlist-detail' play.pk %}">{{ play }}</a></p>
+                                {% endfor %}
+                            </section>
+
+                        </div>
+                    <br><hr>
+                    </section>
+                    <section>
+                        <header class="main-header-custom">
+                            <h2 class="detail-h2">Meus canais</h2>
+                        </header>
+                        <div>
+
+                            <section class="lateral overflow-auto" style="height: 250px;">
+                                {% for can in canal_obj %}
+                                <p><a href="{% url 'canal-detail' can.pk %}">{{ can }}</a></p>
+                                {% endfor %}
+                            </section>
+                        </div>
+                    <br><hr>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Main -->
+{% endblock %}
